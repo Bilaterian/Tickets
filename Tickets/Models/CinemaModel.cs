@@ -11,5 +11,8 @@ namespace Tickets.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
+        //Relationships
+        public List<MovieModel> Movies { get; set; }
+
     }
 }
