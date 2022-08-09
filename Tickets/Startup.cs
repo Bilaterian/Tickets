@@ -1,4 +1,5 @@
-﻿using Tickets.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Tickets.Data;
 
 namespace Tickets
 {
@@ -12,10 +13,10 @@ namespace Tickets
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public object ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             //DbContext configuration
-            services.AddDbContext<TicketsDbContext>();
+            services.AddDbContext<TicketsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             
             services.AddControllersWithViews();
         }
