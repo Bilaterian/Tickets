@@ -4,11 +4,27 @@ using Tickets.Models;
 
 namespace Tickets.Data
 {
-    public class TicketsDbContext: DbContext
+    public class AppDbContext : DbContext
     {
-        public TicketsDbContext(DbContextOptions<TicketsDbContext> options) :base(options)
+        public AppDbContext()
         {
 
+        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        {
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+                var connectionString = configuration.GetConnectionString("DefaultConnectionString");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -16,9 +16,14 @@ namespace Tickets
         public void ConfigureServices(IServiceCollection services)
         {
             //DbContext configuration
-            services.AddDbContext<TicketsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
-            
             services.AddControllersWithViews();
+
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString(
+                        "DefaultConnectionString")
+                    )
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
