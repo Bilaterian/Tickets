@@ -12,5 +12,6 @@
         Mystery = 8,
         Romance = 9,
         Thriller = 10,
+        Cartoon = 11,
     }
 }
