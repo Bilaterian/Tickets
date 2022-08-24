@@ -14,7 +14,7 @@ namespace Tickets.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Movies.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }
